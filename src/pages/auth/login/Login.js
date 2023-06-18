@@ -4,8 +4,11 @@ import Input from '@components/input/Input';
 import Button from '@components/button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import '@pages/auth/login/Login.scss';
-import { authService } from '@services/api/auth/auth.service';
 import useLocalStorage from '@hooks/useLocalStorage';
+import { authService } from '@services/api/auth/auth.service';
+import { Utils } from '@services/utils/utils.service';
+import useSessionStorage from '@hooks/useSessionStorage';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,7 +21,9 @@ const Login = () => {
   const [user, setUser] = useState();
   const [setStoredUsername] = useLocalStorage('username', 'set');
   const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [pageReload] = useSessionStorage('pageReload', 'set');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loginUser = async (event) => {
     setLoading(true);
@@ -33,6 +38,7 @@ const Login = () => {
       setLoggedIn(keepLoggedIn);
       setHasError(false);
       setAlertType('alert-success');
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
       setHasError(true);
