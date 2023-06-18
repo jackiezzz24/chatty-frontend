@@ -4,6 +4,7 @@ import ProtectedRoute from '@pages/ProtectedRoute';
 import Error from '@pages/error/Error';
 import { Suspense, lazy } from 'react';
 import StreamsSkeleton from '@pages/social/streams/StreamsSkeleton';
+import NotificationSkeleton from '@pages/social/notifications/NotificationSkeleton';
 
 const Social = lazy(() => import('@pages/social/Social'));
 const Chat = lazy(() => import('@pages/social/chat/Chat'));
@@ -12,7 +13,6 @@ const Following = lazy(() => import('@pages/social/following/Following'));
 const Notification = lazy(() => import('@pages/social/notifications/Notification'));
 const People = lazy(() => import('@pages/social/people/People'));
 const Photos = lazy(() => import('@pages/social/photos/Photos'));
-const Videos = lazy(() => import('@pages/social/videos/Videos'));
 const Profile = lazy(() => import('@pages/social/profile/Profile'));
 const Streams = lazy(() => import('@pages/social/streams/Streams'));
 
@@ -49,7 +49,7 @@ export const AppRouter = () => {
         {
           path: 'chat/messages',
           element: (
-            <Suspense fallback={<ChatSkeleton />}>
+            <Suspense>
               <Chat />
             </Suspense>
           )
@@ -57,7 +57,7 @@ export const AppRouter = () => {
         {
           path: 'people',
           element: (
-            <Suspense fallback={<CardSkeleton />}>
+            <Suspense>
               <People />
             </Suspense>
           )
@@ -65,7 +65,7 @@ export const AppRouter = () => {
         {
           path: 'followers',
           element: (
-            <Suspense fallback={<CardSkeleton />}>
+            <Suspense>
               <Followers />
             </Suspense>
           )
@@ -73,7 +73,7 @@ export const AppRouter = () => {
         {
           path: 'following',
           element: (
-            <Suspense fallback={<CardSkeleton />}>
+            <Suspense>
               <Following />
             </Suspense>
           )
@@ -81,16 +81,8 @@ export const AppRouter = () => {
         {
           path: 'photos',
           element: (
-            <Suspense fallback={<PhotoSkeleton />}>
+            <Suspense>
               <Photos />
-            </Suspense>
-          )
-        },
-        {
-          path: 'videos',
-          element: (
-            <Suspense fallback={<VideoSkeleton />}>
-              <Videos />
             </Suspense>
           )
         },
@@ -105,7 +97,7 @@ export const AppRouter = () => {
         {
           path: 'profile/:username',
           element: (
-            <Suspense fallback={<ProfileSkeleton />}>
+            <Suspense>
               <Profile />
             </Suspense>
           )

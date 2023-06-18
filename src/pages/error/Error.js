@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Button from '@components/button/Button';
 import { useNavigate } from 'react-router-dom';
 
